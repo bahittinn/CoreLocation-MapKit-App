@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var enlemLabel: UILabel!
+    @IBOutlet weak var boylamLabel: UILabel!
+    @IBOutlet weak var hizLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
 
 
