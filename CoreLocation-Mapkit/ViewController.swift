@@ -28,26 +28,37 @@ class ViewController: UIViewController {
         
         locationManager.startUpdatingLocation()
         
+        mapView.delegate = self
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(addPin(_:)))
+              mapView.addGestureRecognizer(longPressGesture)
         
-        let konum = CLLocationCoordinate2D(latitude: 37.0139023, longitude: 35.2945878)
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        
-        let bolge = MKCoordinateRegion(center: konum, span: span)
-        
-        mapView.setRegion(bolge, animated: true)
-        
-        let pin = MKPointAnnotation()
-        
-        pin.coordinate = konum
-        pin.title = "Adana Ev"
-        pin.subtitle = "Altaşlık"
-        mapView.addAnnotation(pin)
+//        let pin = MKPointAnnotation()
+//
+//        pin.coordinate = konum
+//        pin.title = "Adana Ev"
+//        pin.subtitle = "Altaşlık"
+//        mapView.addAnnotation(pin)
         
     }
+    @objc func addPin(_ gestureRecognizer: UIGestureRecognizer) {
+            if gestureRecognizer.state == .began {
+                // Dokunulan noktayı al
+                let touchPoint = gestureRecognizer.location(in: mapView)
+                
+                // Dokunulan noktayı harita koordinatına dönüştür
+                let coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+                
+                // Pin oluştur ve haritaya ekle
+                let annotation = MKPointAnnotation()
+                annotation.title = "deneme konum"
+                annotation.subtitle = "deneme konum"
+                annotation.coordinate = coordinate
+                mapView.addAnnotation(annotation)
+            }
+        }
 }
 
-extension ViewController: CLLocationManagerDelegate {
+extension ViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let sonKonum:CLLocation = locations[locations.count - 1]
         
@@ -56,8 +67,18 @@ extension ViewController: CLLocationManagerDelegate {
         hizLabel.text = "Hiz: \(sonKonum.speed)"
         
         
+        let konum = CLLocationCoordinate2D(latitude: sonKonum.coordinate.latitude, longitude: sonKonum.coordinate.longitude)
         
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         
+        let bolge = MKCoordinateRegion(center: konum, span: span)
+        
+        mapView.setRegion(bolge, animated: true)
+        mapView.showsUserLocation = true
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+         
     }
 }
 
