@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -42,12 +43,20 @@
                                     <constraint firstAttribute="height" constant="200" id="JeU-Gh-CHl"/>
                                 </constraints>
                             </stackView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPz-HX-871">
+                                <rect key="frame" x="10" y="269" width="373" height="539"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dbo-lf-BxD" secondAttribute="trailing" id="1Yv-bn-8yG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="IPz-HX-871" secondAttribute="bottom" constant="10" id="D58-Pv-Mc9"/>
                             <constraint firstItem="dbo-lf-BxD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="KVe-KR-ixS"/>
+                            <constraint firstItem="IPz-HX-871" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="f8l-pd-9tK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IPz-HX-871" secondAttribute="trailing" constant="10" id="fdK-ty-Flb"/>
+                            <constraint firstItem="IPz-HX-871" firstAttribute="top" secondItem="dbo-lf-BxD" secondAttribute="bottom" constant="10" id="jaW-jA-g9Z"/>
                             <constraint firstItem="dbo-lf-BxD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="woE-Xo-EM8"/>
                         </constraints>
                     </view>
@@ -55,6 +64,7 @@
                         <outlet property="boylamLabel" destination="g7j-A4-Cmr" id="qWi-Jf-VXR"/>
                         <outlet property="enlemLabel" destination="RhK-Oy-5MH" id="3ht-bV-SUR"/>
                         <outlet property="hizLabel" destination="qpE-qB-1gJ" id="ina-oE-7Yf"/>
+                        <outlet property="mapView" destination="IPz-HX-871" id="OpA-e7-BLG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
